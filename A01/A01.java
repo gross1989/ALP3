@@ -7,51 +7,44 @@ public class A01 {
 	
 	Random rand = new Random();
 	
-	public void qsort (float[] arr, int indexA, int indexB) {
-		if (indexB==indexA || indexB < 0 || indexA > arr.length-1 ) 
+	public void qsort (float[] arr, int low, int high) {
+		if (low >= high) 
 			return;
-		// zufaelliges Pivot-Element
-		int p = rand.nextInt(indexB-indexA+1) + indexA;
-		float piv = arr[p];
-		// jedes Element durchgehen
-		int i;
-		int s = p; // Anfang der Liste von Gleichen mit p
-		int e = p; // Ende -"-
-		for (i=indexA; i<indexB+1; i++) {
-				// kleiner-gleich Pivot und danach
-				if (arr[i] <= piv && i > e) {
-					// i zum Anfang der Gleichen
-					arr[s] = arr[i];
-					// das erste groessere nach i
-					arr[i] = arr[e+1];
-					// Pivot nach rechts schieben
-					arr[e+1] = piv;
-					// Ende eins groesser
-					e++;
-					// Anfang um eins groesser wenn echt 
-					if (arr[s] < piv)
-						s++;
-				// groesser-gleich Pivot und davor
-				} else if (arr[i] >= piv && i < s) {
-					// i zum Ende der Gleichen
-					arr[e] = arr[i];
-					// das erste kleinere nach i
-					arr[i] = arr[s-1];
-					// Pivot nach links schieben
-					arr[s-1] = piv;
-					// Anfang eins kleiner
-					s--;
-					// Ende eins kleiner wenn echt 
-					if (arr[e] > piv)
-						e--;					
-				}
-		}	
-		System.out.println(piv + " " + indexA + " " + indexB);
-		System.out.println(s + " " + e);
-		System.out.println(Arrays.toString(arr));
+		//~ System.out.println("s:" + s + "e:" + e);
+		//~ System.out.println(Arrays.toString(arr));
 		
-		qsort(arr, 0, s-1);
-		qsort(arr, e+1, arr.length-1);
+		int p = partition(arr, low, high);
+		qsort(arr, low, p);
+		qsort(arr, p+1, high);
 	}
 	
+	private int partition (float arr[], int low, int high) {
+		// zufaelliges Pivot-Element
+		int p = rand.nextInt(high - low +1) + low;
+		float piv = arr[p];
+		
+		int i = low;
+		int j = high;
+		// Array gleichzeitig von links und rechts durchgehen und
+		// kleineres als Pivot auf linker Seiter mit groesserem als Pivot
+		// auf rechter Seite vertauschen, Ende wenn sich Indizes treffen
+		while (i <= j) {
+			while (arr[i] < piv) {
+				i++;
+			}
+ 
+			while (arr[j] > piv) {
+				j--;
+			}
+ 
+			if (i <= j) {
+				float temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+				i++;
+				j--;
+			}
+		}
+		return j;
+	}
 }

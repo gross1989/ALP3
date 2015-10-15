@@ -9,6 +9,7 @@ public class A01_test {
 		
 		A01 a01 = new A01();
 		System.out.println(Arrays.toString(a));
+
 		a01.qsort(a, 0, a.length-1);
 		System.out.println(Arrays.toString(a));
 	}
