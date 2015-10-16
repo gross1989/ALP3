@@ -6,16 +6,20 @@ import java.util.Arrays;
 public class A01 {
 	
 	Random rand = new Random();
+	public int anz_vergleiche = 0;
 	
-	public void qsort (float[] arr, int low, int high) {
-		if (low >= high) 
+	public void qsort (float[] arr, int low, int high, int b) {
+		if (low + b >= high) {
+			isort(arr, low, high);
 			return;
+		}
+		
 		//~ System.out.println("s:" + s + "e:" + e);
 		//~ System.out.println(Arrays.toString(arr));
 		
 		int p = partition(arr, low, high);
-		qsort(arr, low, p);
-		qsort(arr, p+1, high);
+		qsort(arr, low, p, b);
+		qsort(arr, p+1, high, b);
 	}
 	
 	private int partition (float arr[], int low, int high) {
@@ -31,10 +35,12 @@ public class A01 {
 		while (i <= j) {
 			while (arr[i] < piv) {
 				i++;
+				anz_vergleiche++;
 			}
  
 			while (arr[j] > piv) {
 				j--;
+				anz_vergleiche++;
 			}
  
 			if (i <= j) {
@@ -46,5 +52,22 @@ public class A01 {
 			}
 		}
 		return j;
+	}
+	
+	public void isort (float arr[], int low, int high) {
+		int n = high - low + 1;
+		int i, j;
+		for (i=1; i<n; i++) {
+			float v = arr[low+i];
+			j = i-1;
+			while (j>=0 && arr[low+j] >= v) {
+				// Zahlen groesser-gleich verschieben
+				arr[low+j+1] = arr[low+j];
+				j--;
+				anz_vergleiche++;
+			}
+			// hinter kleinerer Zahl einsortieren
+			arr[low+j+1] = v;
+		}
 	}
 }
