@@ -9,13 +9,11 @@ public class A01 {
 	public int anz_vergleiche = 0;
 	
 	public void qsort (float[] arr, int low, int high, int b) {
+		// bei nur noch wenigen Elementen auf isort umschalten
 		if (low + b >= high) {
 			isort(arr, low, high);
 			return;
 		}
-		
-		//~ System.out.println("s:" + s + "e:" + e);
-		//~ System.out.println(Arrays.toString(arr));
 		
 		int p = partition(arr, low, high);
 		qsort(arr, low, p, b);
@@ -30,7 +28,7 @@ public class A01 {
 		int i = low;
 		int j = high;
 		// Array gleichzeitig von links und rechts durchgehen und
-		// kleineres als Pivot auf linker Seiter mit groesserem als Pivot
+		// groesseres als Pivot auf linker Seiter mit kleinerem als Pivot
 		// auf rechter Seite vertauschen, Ende wenn sich Indizes treffen
 		while (i <= j) {
 			while (arr[i] < piv) {

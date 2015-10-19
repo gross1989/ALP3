@@ -9,23 +9,31 @@ public class A01_test {
 	
 	public static void main (String[] argv) {
 		
+		A01 a01 = new A01();
+		
+		// Argument b einlesen
+		int b = argv.length == 1 ? Integer.parseInt(argv[0]) : 5;
+		System.out.println("b = " + b);
+		System.out.println("N = " + N);
+		
+		// Zufallseingabe der Groesse N generieren
 		Random rand = new Random();
-
 		for (int i=0; i<N; i++)
 			arr[i] = rand.nextFloat();
-		
-		A01 a01 = new A01();
-		//~ System.out.println(Arrays.toString(arr));
-		System.out.println("array init");
+		System.out.println("array inited");
 
-		a01.qsort(arr, 0, arr.length-1, 5);
-		//~ a01.isort(arr, 0, arr.length-1);
 		//~ System.out.println(Arrays.toString(arr));
-		System.out.println("done");
+		
+		long startTime = System.nanoTime();
+
+		a01.qsort(arr, 0, arr.length-1, b);
+		
+		long estimatedTime = System.nanoTime() - startTime;
+
+		System.out.println("Vergleiche: " + a01.anz_vergleiche);
+		System.out.println("Zeit (s): " + estimatedTime * 1E-9f);
+		
 		System.out.println("sorted?: " + issorted(arr));
-		System.out.println("Vergleiche?: " + a01.anz_vergleiche);
-		
-
 	}
 	
 	private static boolean issorted(float arr[]) {
