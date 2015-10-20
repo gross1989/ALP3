@@ -13,14 +13,13 @@ public class A01_test {
 		
 		// Argument b einlesen
 		int b = argv.length == 1 ? Integer.parseInt(argv[0]) : 5;
-		System.out.println("b = " + b);
-		System.out.println("N = " + N);
+		System.out.print("b = " + b + "\tN = " + N + "\t");
 		
 		// Zufallseingabe der Groesse N generieren
 		Random rand = new Random();
 		for (int i=0; i<N; i++)
 			arr[i] = rand.nextFloat();
-		System.out.println("array inited");
+		//~ System.out.println("array inited");
 
 		//~ System.out.println(Arrays.toString(arr));
 		
@@ -30,10 +29,9 @@ public class A01_test {
 		
 		long estimatedTime = System.nanoTime() - startTime;
 
-		System.out.println("Vergleiche: " + a01.anz_vergleiche);
-		System.out.println("Zeit (s): " + estimatedTime * 1E-9f);
+		System.out.println("Vergleiche: " + a01.anz_vergleiche + "\tZeit (s): " + estimatedTime * 1E-9f);
 		
-		System.out.println("sorted?: " + issorted(arr));
+		//~ System.out.println("sorted?: " + issorted(arr));
 	}
 	
 	private static boolean issorted(float arr[]) {
