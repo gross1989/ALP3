@@ -20,7 +20,6 @@ public class A01_test {
 		for (int i=0; i<N; i++)
 			arr[i] = rand.nextFloat();
 		//~ System.out.println("array inited");
-
 		//~ System.out.println(Arrays.toString(arr));
 		
 		long startTime = System.nanoTime();
@@ -29,14 +28,25 @@ public class A01_test {
 		
 		long estimatedTime = System.nanoTime() - startTime;
 
-		System.out.println("Vergleiche: " + a01.anz_vergleiche + "\tZeit (s): " + estimatedTime * 1E-9f);
+		System.out.print("Vergl.: " + a01.anz_vergleiche + " Zeit: " + estimatedTime * 1E-9f);
 		
 		//~ System.out.println("sorted?: " + issorted(arr));
+		System.out.println("\tDoppelt: " + doppelte(arr));
 	}
 	
 	private static boolean issorted(float arr[]) {
 		for (int i=0; i<arr.length-1; i++)
 			if (arr[i] > arr[i+1]) return false;
 		return true;
+	}
+	private static int doppelte(float arr[]) {
+		float v = arr[0];
+		int doppelte = 0;
+		for (int i=1; i<arr.length-2; i++) {
+			// doppelt, wenn anders als vorherige und gleich folgender Zahl
+			if ( arr[i] != v && arr[i+1]==arr[i] ) doppelte++;
+			v = arr[i];
+		}
+		return doppelte;
 	}
 }

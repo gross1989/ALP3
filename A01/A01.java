@@ -6,7 +6,7 @@ import java.util.Arrays;
 public class A01 {
 	
 	Random rand = new Random();
-	public int anz_vergleiche = 0;
+	public long anz_vergleiche = 0;
 	
 	public void qsort (float[] arr, int low, int high, int b) {
 		// bei nur noch wenigen Elementen auf isort umschalten
