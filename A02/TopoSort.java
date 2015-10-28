@@ -31,7 +31,7 @@ private void Kreisfinden (Knoten u)
 		u.visited = true;
 		// Pfad um u erweitern
 		Pfad[len_Pfad++] = u;
-		// Tefensuche rekursiv fuer Nachfolgeknoten aufrufen
+		// Tiefensuche rekursiv fuer Nachfolgeknoten aufrufen
 		Kante z = u.ersterNachfolger;
 		while (z != null) {
 			Kreisfinden(z.v);
@@ -82,8 +82,10 @@ TopoSort() throws IOException
 	    Pfad = new Knoten[n];
 	    len_Pfad = 0;
 	    // Tiefensuche von einem der restlichen Knoten aus
-	    for (int j=1; j<=n; j++)
+	    for (int j=1; j<=n; j++) {
 			if (Liste[i].anzVorgänger > 0) Kreisfinden(Liste[i]);
+			break;
+		}
 	    break sort;
 	}
 	// Wähle einen Knoten ohne Vorgänger
