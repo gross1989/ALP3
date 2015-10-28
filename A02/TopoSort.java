@@ -21,15 +21,17 @@ public static void main (String[] args) throws IOException
 private void Kreisfinden (Knoten u)
 {
 	if (u.visited == true && u.finished == false) {
-		// Kreis gefunden, alle Knoten auf dem Pfad ab u auf dem Kreis
-		for (int i=0; i<len_Pfad; i++)
-			System.out.print(Pfad[i].Name + " ");
+		// Kreis gefunden, Knoten auf dem Pfad ab u bilden Kreis
+		int i;
+		for (i=0; Pfad[i] != u; i++) ;
+		for (; i<len_Pfad; i++) System.out.print(Pfad[i].Name + " ");
+		System.out.println(u.Name);
 	}
 	else if (u.visited == false) {
 		u.visited = true;
 		// Pfad um u erweitern
 		Pfad[len_Pfad++] = u;
-		// fur alle Nachfolger
+		// Tefensuche rekursiv fuer Nachfolgeknoten aufrufen
 		Kante z = u.ersterNachfolger;
 		while (z != null) {
 			Kreisfinden(z.v);
@@ -79,7 +81,7 @@ TopoSort() throws IOException
 	    System.out.println("Die Eingabe enthält einen Kreis."); 
 	    Pfad = new Knoten[n];
 	    len_Pfad = 0;
-	    // Tiefensuche von einem restlichen Knoten aus
+	    // Tiefensuche von einem der restlichen Knoten aus
 	    for (int j=1; j<=n; j++)
 			if (Liste[i].anzVorgänger > 0) Kreisfinden(Liste[i]);
 	    break sort;
